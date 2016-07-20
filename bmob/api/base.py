@@ -3,8 +3,6 @@ import json
 import mimetypes
 from urllib import request
 
-HTTP_TIMEOUT = 10
-
 mimetypes.init(["mimetypes.txt"])
 
 
@@ -21,7 +19,7 @@ class BmobBase(object):
         }
         req = request.Request(url, data=body, headers=headers)
         self.http_add_headers(req)
-        res = request.urlopen(req, timeout=HTTP_TIMEOUT)
+        res = request.urlopen(req)
         body = res.read().decode("utf-8")
         if parse:
             return json.loads(body, object_hook=_obj_hook)
